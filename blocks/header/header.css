@@ -1,3 +1,12 @@
 .header {
-  
+  width: calc(100% - 400px);
+  display: flex;
+  flex-direction: column;
+  padding-top: 45px;
+}
+
+@media (min-width: 1280px) {
+  .header {
+    width: 880px;
+  }
 }
