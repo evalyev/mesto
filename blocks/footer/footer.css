@@ -1,3 +1,14 @@
 .footer {
-  
+  font-size: 18px;
+  line-height: 22px;
+  color: #545454;
+  padding-top: 66px;
+  padding-bottom: 60px;
+  width: calc(100% - 400px);
+}
+
+@media (min-width: 1280px) {
+  .footer {
+    width: 880px;
+  }
 }

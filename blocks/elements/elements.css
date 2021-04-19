@@ -1,5 +1,5 @@
 .elements {
-  width: calc(100% - 200px);
+  width: calc(100% - 400px);
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   column-gap: 17px;
