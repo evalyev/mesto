@@ -1,0 +1,13 @@
+.profile {
+  color: #fff;
+  display: flex;
+  padding-top: 40px;
+  width: calc(100% - 200px);
+  align-items: center;
+}
+
+@media (min-width: 1280px) {
+  .profile {
+    width: 880px;
+  }
+}
