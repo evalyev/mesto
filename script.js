@@ -11,7 +11,6 @@ let profileEditButton = document.querySelector('.profile__edit-button');
 function editButton() {
   popup.classList.add('popup_opened');
   popupName.setAttribute('value', profileName.textContent);
-  console.log(profileName.textContent);
   popupDescription.setAttribute('value', profileDescription.textContent);
 }
 
@@ -19,15 +18,12 @@ profileEditButton.addEventListener('click', editButton);
 
 popupClose.addEventListener('click', function(){
   popup.classList.remove('popup_opened');
-  console.log(popupName.getAttribute('value'));
 });
 
 function formSubmitHandler (evt) {
   evt.preventDefault();
-  profileName.textContent = popupName.getAttribute('value');
-  console.log(popupName.getAttribute('value'));
-  profileDescription.textContent = popupDescription.getAttribute('value');
-  console.log(popupDescription.getAttribute('value'));
+  profileName.textContent = popupName.value;
+  profileDescription.textContent = popupDescription.value;
   popup.classList.remove('popup_opened');
 }
 

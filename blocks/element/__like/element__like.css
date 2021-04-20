@@ -1,3 +1,9 @@
 .element__like {
-  
+  transition: opacity 0.3s;
+  align-self: center;
+}
+
+.element__like:hover {
+  opacity: 0.5;
+  cursor: pointer;
 }
