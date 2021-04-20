@@ -5,8 +5,8 @@
   font-size: 18px;
   line-height: 22px;
   margin-top: 16px;
-  text-align: center;
   width: 100%;
+  text-align: start;
 }
 
 @media (max-width: 768px) {
@@ -20,5 +20,6 @@
   .profile__description {
     margin-top: 14px;
     margin-bottom: 36px;
+    text-align: center;
   }
 }

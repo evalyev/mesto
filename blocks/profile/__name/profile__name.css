@@ -1,16 +1,18 @@
 .profile__name {
   padding: 0;
   margin: 0;
-  margin-right: 10px;
+  margin-right: 18px;
   font-weight: 500;
   font-size: 42px;
   line-height: 48px;
   box-sizing: border-box;
+  vertical-align: bottom;
 }
 
 @media (max-width: 768px) {
   .profile__name {
     font-size: 27px;
     line-height: 33px;
+    margin-right: 10px;
   }
 }

@@ -4,6 +4,12 @@
   padding: 12px 62px;
   border: 2px solid #FFFFFF;
   border-radius: 2px;
+  transition: opacity 0.3s;
+}
+
+.profile__add-button:hover {
+  cursor: pointer;
+  opacity: 0.6;
 }
 
 @media (max-width: 768px) {
