@@ -26,3 +26,9 @@
     padding-top: 36px;
   }
 }
+
+@media (max-width: 520px) {
+  .elements {
+    grid-template-columns: 1fr;
+  }
+}

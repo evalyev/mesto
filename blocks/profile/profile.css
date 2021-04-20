@@ -24,3 +24,9 @@
     width: calc(100% - 38px);
   }
 }
+
+@media (max-width: 600px) {
+  .profile {
+    flex-direction: column;
+  }
+}

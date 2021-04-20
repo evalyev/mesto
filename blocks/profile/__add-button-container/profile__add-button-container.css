@@ -3,3 +3,16 @@
   display: flex;
   justify-content: flex-end;
 }
+
+@media (max-width: 600px) {
+  .profile__add-button-container {
+    display: flex;
+    width: 220px;
+  }
+}
+
+@media (max-width: 390px) {
+  .profile__add-button-container {
+    width: 100%;
+  }
+}

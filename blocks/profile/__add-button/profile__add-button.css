@@ -12,3 +12,9 @@
     height: 16px;
   }
 }
+
+@media (max-width: 600px) {
+  .profile__add-button {
+    flex-grow: 1;
+  }
+}
