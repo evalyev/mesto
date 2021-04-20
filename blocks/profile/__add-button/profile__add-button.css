@@ -5,3 +5,10 @@
   border: 2px solid #FFFFFF;
   border-radius: 2px;
 }
+
+@media (max-width: 768px) {
+  .profile__add-button {
+    width: 16px;
+    height: 16px;
+  }
+}

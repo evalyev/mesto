@@ -17,3 +17,10 @@
     width: calc(100% - 100px);
   }
 }
+
+@media (max-width: 768px) {
+  .profile {
+    padding-top: 42px;
+    width: calc(100% - 38px);
+  }
+}

@@ -5,3 +5,11 @@
   border: 1px solid #FFFFFF;
   align-self: flex-end;
 }
+
+@media (max-width: 768px) {
+  .profile__edit-button {
+    width: 7.5px;
+    height: 7.5px;
+    padding: 4.25px;
+  }
+}
