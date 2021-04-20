@@ -12,3 +12,9 @@
     width: 880px;
   }
 }
+
+@media (max-width: 1084px) {
+  .elements {
+    width: calc(100% - 100px);
+  }
+}

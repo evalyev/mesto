@@ -11,3 +11,9 @@
     width: 880px;
   }
 }
+
+@media (max-width: 1084px) {
+  .profile {
+    width: calc(100% - 100px);
+  }
+}

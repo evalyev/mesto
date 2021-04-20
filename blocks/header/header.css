@@ -10,3 +10,9 @@
     width: 880px;
   }
 }
+
+@media (max-width: 1084px) {
+  .header {
+    width: calc(100% - 100px);
+  }
+}
