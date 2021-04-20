@@ -1,0 +1,5 @@
+.profile__add-button-container {
+  flex-grow: 1;
+  display: flex;
+  justify-content: flex-end;
+}
