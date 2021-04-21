@@ -11,7 +11,6 @@
 <body class="page">
   <header class="header">
     <img class="header__logo" src="./images/logo.svg" alt="Логотип">
-    <img class="header__line" src="./images/header__line.svg" alt="Линия">
   </header>
 
   <main class="content">
@@ -20,12 +19,12 @@
       <div class="profile__info">
         <div class="profile__two-columns">
         <h1 class="profile__name">Жак-Ив Кусто</h1>
-        <img class="profile__edit-button" src="./images/profile__edit-button.svg" alt="Кнопка редактирования профиля">
+        <button class="profile__edit-button" type="button"></button>
         </div>
         <p class="profile__description">Исследователь океана</p>
       </div>
       <div class="profile__add-button-container">
-        <img class="profile__add-button" src="./images/profile__add-button.svg" alt="Кнопка добавления карточки">
+        <button class="profile__add-button" type="button"></button>
       </div>
     </section>
 
@@ -34,62 +33,64 @@
         <img class="element__image" src="./images/place__karachaevsk.jpg" alt="Карачаевск">
         <div class="element__info">
           <h2 class="element__title">Карачаевск</h2>
-          <img class="element__like" src="./images/element__like.svg" alt="Like">
+          <button class="element__like" type="button"></button>
         </div>
       </div>
       <div class="element">
         <img class="element__image" src="./images/place__elbrus.jpg" alt="Эльбрус">
         <div class="element__info">
           <h2 class="element__title">Гора Эльбрус</h2>
-          <img class="element__like" src="./images/element__like.svg" alt="Like">
+          <button class="element__like" type="button"></button>
         </div>
       </div>
       <div class="element">
         <img class="element__image" src="./images/place__dombay.jpg" alt="Домбай">
         <div class="element__info">
           <h2 class="element__title">Домбай</h2>
-          <img class="element__like" src="./images/element__like.svg" alt="Like">
+          <button class="element__like" type="button"></button>
         </div>
       </div>
       <div class="element">
         <img class="element__image" src="./images/place__elbrus.jpg" alt="Эльбрус">
         <div class="element__info">
           <h2 class="element__title">Гора Эльбрус</h2>
-          <img class="element__like" src="./images/element__like.svg" alt="Like">
+          <button class="element__like" type="button"></button>
         </div>
       </div>
       <div class="element">
         <img class="element__image" src="./images/place__dombay.jpg" alt="Домбай">
         <div class="element__info">
           <h2 class="element__title">Домбай</h2>
-          <img class="element__like" src="./images/element__like.svg" alt="Like">
+          <button class="element__like" type="button"></button>
         </div>
       </div>
       <div class="element">
         <img class="element__image" src="./images/place__karachaevsk.jpg" alt="Карачаевск">
         <div class="element__info">
           <h2 class="element__title">Карачаево-Черкессия</h2>
-          <img class="element__like" src="./images/element__like.svg" alt="Like">
+          <button class="element__like" type="button"></button>
         </div>
       </div>
     </section>
   </main>
 
-  <section class="popup">
-    <form class="popup__container">
-      <h2 class="popup__title">Редактировать профиль</h2>
-      <input class="popup__name" type="text" value="Жак-Ив Кусто">
-      <input class="popup__description" type="text" value="Исследователь океана">
-      <button class="popup__submit" type="submit">Сохранить</button>
-      <img class="popup__close" src="images/form__close.svg" alt="Кнопка закрыть">
-    </form>
-  </section>
-
   <footer class="footer">
-    &copy; 2020 Mesto Russia
+    <p class="footer__text">&copy; 2020 Mesto Russia</p>
   </footer>
 
-  <script src="./script.js"></script>
+  <section class="popup">
+    <div class="popup__container">
+      <h2 class="popup__title">Редактировать профиль</h2>
+      <form class="popup__form" name="edit-form">
+      <input class="popup__input-text popup__input-text_profile_name" type="text" placeholder="Ваше имя" name="edit-form-name" value="Жак-Ив Кусто">
+      <input class="popup__input-text popup__input-text_profile_description" type="text" placeholder="Описание" name="edit-form-description" value="Исследователь океана">
+      <button class="popup__submit" type="submit">Сохранить</button>
+      </form>
+      <button class="popup__close"></button>
+    </div>
+  </section>
+
+  <script src="./scripts/index.js"></script>
 </body>
 
 </html>

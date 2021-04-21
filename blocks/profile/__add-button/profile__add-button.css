@@ -1,8 +1,12 @@
 .profile__add-button {
-  width: 22px;
-  height: 22px;
-  padding: 12px 62px;
+  background: none;
+  background-image: url(../../../images/profile__add-button.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 22px 22px;
+  padding: 23px 73px;
   border: 2px solid #FFFFFF;
+  border-radius: 0;
   border-radius: 2px;
   transition: opacity 0.3s;
 }
@@ -14,12 +18,11 @@
 
 @media (max-width: 768px) {
   .profile__add-button {
-    width: 16px;
-    height: 16px;
+    background-size: 16px 16px;
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 700px) {
   .profile__add-button {
     flex-grow: 1;
   }

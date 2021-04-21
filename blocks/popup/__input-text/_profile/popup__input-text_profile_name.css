@@ -1,0 +1,9 @@
+.popup__input-text_profile_name {
+  margin-top: 54px;
+}
+
+@media (max-width: 570px) {
+  .popup__input-text_profile_name {
+    margin-top: 75px;
+  }
+}

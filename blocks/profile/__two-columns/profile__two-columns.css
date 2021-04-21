@@ -3,3 +3,9 @@
   display: flex;
   margin-right: 10px;
 }
+
+@media (max-width: 700px) {
+  .profile__two-columns {
+    justify-content: center;
+  }
+}
