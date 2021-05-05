@@ -100,10 +100,16 @@ function formSubmitHandler (evt) {
 
 function addCard(title, imageLink) {
   const newCard = cardTemplate.content.querySelector('.element').cloneNode(true);
-  newCard.querySelector('.element__title').textContent = title;
   const elementImage = newCard.querySelector('.element__image');
+  const elementLike = newCard.querySelector('.element__like');
+
+  newCard.querySelector('.element__title').textContent = title;
   elementImage.src = imageLink;
   elementImage.alt = title;
+  elementLike.addEventListener('click', function(e) {
+    e.target.classList.toggle('element__like_active');
+  })
+  
   return newCard;
 }
 
