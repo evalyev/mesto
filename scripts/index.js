@@ -1,17 +1,17 @@
-let popup = document.querySelector('.popup');
-let popupForm = document.querySelector('.popup__form');
-let popupName = document.querySelector('.popup__input-text_profile_name');
-let popupDescription = document.querySelector('.popup__input-text_profile_description');
-let popupClose = document.querySelector('.popup__close');
+const popup = document.querySelector('.popup');
+const popupForm = document.querySelector('.popup__form');
+const popupName = document.querySelector('.popup__input-text_profile_name');
+const popupDescription = document.querySelector('.popup__input-text_profile_description');
+const popupClose = document.querySelector('.popup__close');
 const popupTitle = document.querySelector('.popup__title')
 const popupSubmit = document.querySelector('.popup__submit');
 const popupCard = document.querySelector('.popup div img').closest('.popup');
 const popupCardClose = document.querySelector('.popup div img').closest('.popup').querySelector('.popup__close');
 const popupCardImage = document.querySelector('.popup div img');
 
-let profileName = document.querySelector('.profile__name');
-let profileDescription = document.querySelector('.profile__description');
-let profileEditButton = document.querySelector('.profile__edit-button');
+const profileName = document.querySelector('.profile__name');
+const profileDescription = document.querySelector('.profile__description');
+const profileEditButton = document.querySelector('.profile__edit-button');
 const profileAddButton = document.querySelector('.profile__add-button');
 
 const elementContainer = document.querySelector('.elements');
