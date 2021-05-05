@@ -102,12 +102,16 @@ function addCard(title, imageLink) {
   const newCard = cardTemplate.content.querySelector('.element').cloneNode(true);
   const elementImage = newCard.querySelector('.element__image');
   const elementLike = newCard.querySelector('.element__like');
+  const elementTrash = newCard.querySelector('.element__trash');
 
   newCard.querySelector('.element__title').textContent = title;
   elementImage.src = imageLink;
   elementImage.alt = title;
   elementLike.addEventListener('click', function(e) {
     e.target.classList.toggle('element__like_active');
+  });
+  elementTrash.addEventListener('click', function(e) {
+    e.target.closest('.element').remove();
   })
   
   return newCard;
