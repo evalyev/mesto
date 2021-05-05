@@ -2,6 +2,8 @@
   transition: opacity 0.3s;
   background: none;
   background-image: url(../../../images/trash.svg);
+  background-repeat: no-repeat;
+  background-size: 100%;
   border: none;
   width: 18px;
   height: 19.3px;
