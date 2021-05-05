@@ -9,6 +9,14 @@
   align-self: flex-start;
 }
 
+.popup_type_card .popup__container .popup__title {
+  color: white;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 15px;
+  margin: 10px 0 0;
+}
+
 @media (max-width: 570px) {
   .popup__title {
     font-size: 18px;

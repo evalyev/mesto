@@ -5,6 +5,9 @@ let popupDescription = document.querySelector('.popup__input-text_profile_descri
 let popupClose = document.querySelector('.popup__close');
 const popupTitle = document.querySelector('.popup__title')
 const popupSubmit = document.querySelector('.popup__submit');
+const popupCard = document.querySelector('.popup div img').closest('.popup');
+const popupCardClose = document.querySelector('.popup div img').closest('.popup').querySelector('.popup__close');
+const popupCardImage = document.querySelector('.popup div img');
 
 let profileName = document.querySelector('.profile__name');
 let profileDescription = document.querySelector('.profile__description');
@@ -40,6 +43,8 @@ const initialCards = [
     link: './images/baikal.jpg'
   }
 ]; 
+
+popupCardClose.addEventListener('click', closePopupCard);
 
 profileAddButton.addEventListener('click', function() {
   openPopup();
@@ -113,7 +118,19 @@ function addCard(title, imageLink) {
   elementTrash.addEventListener('click', function(e) {
     e.target.closest('.element').remove();
   })
-  
+  elementImage.addEventListener('click', function(e) {
+    openPopupCard(e.target.src);
+  })
+
+
   return newCard;
 }
 
+function openPopupCard(imageLink) {
+  popupCard.classList.add('popup_opened');
+  popupCardImage.src = imageLink;
+}
+
+function closePopupCard() {
+  popupCard.classList.remove('popup_opened');
+}

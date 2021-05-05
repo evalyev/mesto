@@ -10,6 +10,12 @@
   z-index: 2;
 }
 
+.popup_type_card .popup__container {
+  width: auto;
+  background: none;
+  border: none;
+}
+
 @media (max-width: 570px) {
   .popup__container {
     width: 282px;
