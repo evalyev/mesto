@@ -1,15 +1,21 @@
-const popup = document.querySelector('.popup');
-const popupForm = document.querySelector('.popup__form');
-const popupName = document.querySelector('.popup__input-text_profile_name');
-const popupDescription = document.querySelector('.popup__input-text_profile_description');
-const popupClose = document.querySelector('.popup__close');
-const popupTitle = document.querySelector('.popup__title')
-const popupSubmit = document.querySelector('.popup__submit');
+const popupEditProfile = document.querySelector('.popup_type_edit-profile');
+const popupEditProfileForm = popupEditProfile.querySelector('.popup__form');
+const popupEditProfileName = popupEditProfile.querySelector('.popup__input-text_profile_name');
+const popupEditProfileDescription = popupEditProfile.querySelector('.popup__input-text_profile_description');
+const popupEditProfileClose = popupEditProfile.querySelector('.popup__close');
+const popupEditProfileTitle = popupEditProfile.querySelector('.popup__title')
+const popupEditProfileSubmit = popupEditProfile.querySelector('.popup__submit');
 
-const popupCard = document.querySelector('.popup div img').closest('.popup');
-const popupCardClose = document.querySelector('.popup div img').closest('.popup').querySelector('.popup__close');
-const popupCardImage = document.querySelector('.popup div img');
-const popupCardTitle = document.querySelector('.popup_type_card').querySelector('.popup__title')
+const popupAddCard = document.querySelector('.popup_type_add-card');
+const popupAddCardForm = popupAddCard.querySelector('.popup__form');
+const popupAddCardTitle = popupAddCard.querySelector('.popup__input-text_profile_name');
+const popupAddCardImageLink = popupAddCard.querySelector('.popup__input-text_profile_description');
+const popupAddCardClose = popupAddCard.querySelector('.popup__close');
+
+const popupCard = document.querySelector('.popup_type_card');
+const popupCardClose = popupCard.querySelector('.popup__close');
+const popupCardImage = popupCard.querySelector('.popup__image');
+const popupCardTitle = popupCard.querySelector('.popup__title')
 
 const profileName = document.querySelector('.profile__name');
 const profileDescription = document.querySelector('.profile__description');
@@ -19,90 +25,54 @@ const profileAddButton = document.querySelector('.profile__add-button');
 const elementContainer = document.querySelector('.elements');
 const cardTemplate = document.querySelector('#element');
 
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: './images/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: './images/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: './images/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: './images/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: './images/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: './images/baikal.jpg'
-  }
-]; 
-
-popupCardClose.addEventListener('click', closePopupCard);
-
-profileAddButton.addEventListener('click', function() {
-  openPopup();
-  cardPopup();
-})
-
-profileEditButton.addEventListener('click', function() {
-  openPopup();
-  profilePopup();
-});
-
-popupClose.addEventListener('click', closePopup);
-
-popupForm.addEventListener('submit', formSubmitHandler); 
-
 initialCards.forEach(item => {
   elementContainer.append(addCard(item.name, item.link));
 })
 
+profileEditButton.addEventListener('click', function() {
+  openPopup(popupEditProfile);
+  profilePopup();
+});
 
-function openPopup() {
+popupEditProfileClose.addEventListener('click', () => closePopup(popupEditProfile));
+
+popupEditProfileForm.addEventListener('submit', submitPopupEditProfile); 
+
+profileAddButton.addEventListener('click', function() {
+  openPopup(popupAddCard);
+})
+
+popupAddCardForm.addEventListener('submit', submitPopupAddCard);
+
+popupAddCardClose.addEventListener('click', () => closePopup(popupAddCard));
+
+popupCardClose.addEventListener('click', () => closePopup(popupCard));
+
+
+function openPopup(popup) {
   popup.classList.add('popup_opened');
 }
 
-function cardPopup() {
-  popupTitle.textContent = 'Новое место';
-  popupName.setAttribute('placeholder', 'Название');
-  popupDescription.setAttribute('placeholder', 'Ссылка на картинку');
-  popupName.value = '';
-  popupDescription.value = '';
-  popupSubmit.textContent = 'Создать';
-}
-
-function profilePopup() {
-  popupTitle.textContent = 'Редактировать профиль';
-  popupName.setAttribute('placeholder', 'Ваше имя');
-  popupDescription.setAttribute('placeholder', 'Описание');
-  popupName.value = profileName.textContent;
-  popupDescription.value = profileDescription.textContent;
-  popupSubmit.textContent = 'Сохранить';
-}
-
-function closePopup() {
+function closePopup(popup) {
   popup.classList.remove('popup_opened');
 }
 
-function formSubmitHandler (evt) {
+function profilePopup() {
+  popupEditProfileName.value = profileName.textContent; 
+  popupEditProfileDescription.value = profileDescription.textContent;
+}
+
+function submitPopupEditProfile (evt) {
   evt.preventDefault();
-  if(popupTitle.textContent === 'Редактировать профиль') {
-  profileName.textContent = popupName.value;
-  profileDescription.textContent = popupDescription.value;
-  }
-  else if (popupTitle.textContent === 'Новое место') {
-    elementContainer.prepend(addCard(popupName.value, popupDescription.value));
-  }
-  closePopup();
+  profileName.textContent = popupEditProfileName.value;
+  profileDescription.textContent = popupEditProfileDescription.value;
+  closePopup(popupEditProfile);
+}
+
+function submitPopupAddCard (evt) {
+  evt.preventDefault();
+  elementContainer.prepend(addCard(popupAddCardTitle.value, popupAddCardImageLink.value));
+  closePopup(popupAddCard);
 }
 
 function addCard(title, imageLink) {
@@ -121,6 +91,7 @@ function addCard(title, imageLink) {
     e.target.closest('.element').remove();
   })
   elementImage.addEventListener('click', function(e) {
+    openPopup(popupCard);
     openPopupCard(e.target.closest('.element').querySelector('.element__title').textContent, e.target.src);
   })
 
@@ -129,11 +100,6 @@ function addCard(title, imageLink) {
 }
 
 function openPopupCard(titleData, imageLink) {
-  popupCard.classList.add('popup_opened');
   popupCardImage.src = imageLink;
   popupCardTitle.textContent = titleData;
-}
-
-function closePopupCard() {
-  popupCard.classList.remove('popup_opened');
 }
