@@ -15,7 +15,7 @@ const popupAddCardClose = popupAddCard.querySelector('.popup__close');
 const popupCard = document.querySelector('.popup_type_card');
 const popupCardClose = popupCard.querySelector('.popup__close');
 const popupCardImage = popupCard.querySelector('.popup__image');
-const popupCardTitle = popupCard.querySelector('.popup__title')
+const popupCardTitle = popupCard.querySelector('.popup__card-title')
 
 const profileName = document.querySelector('.profile__name');
 const profileDescription = document.querySelector('.profile__description');
@@ -101,5 +101,6 @@ function addCard(title, imageLink) {
 
 function openPopupCard(titleData, imageLink) {
   popupCardImage.src = imageLink;
+  popupCardImage.alt = titleData;
   popupCardTitle.textContent = titleData;
 }
