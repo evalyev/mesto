@@ -27,3 +27,9 @@
     flex-grow: 1;
   }
 }
+
+@media (max-width: 390px) {
+  .profile__add-button {
+    width: 100%;
+  }
+}
