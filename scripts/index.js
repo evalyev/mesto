@@ -5,9 +5,11 @@ const popupDescription = document.querySelector('.popup__input-text_profile_desc
 const popupClose = document.querySelector('.popup__close');
 const popupTitle = document.querySelector('.popup__title')
 const popupSubmit = document.querySelector('.popup__submit');
+
 const popupCard = document.querySelector('.popup div img').closest('.popup');
 const popupCardClose = document.querySelector('.popup div img').closest('.popup').querySelector('.popup__close');
 const popupCardImage = document.querySelector('.popup div img');
+const popupCardTitle = document.querySelector('.popup_type_card').querySelector('.popup__title')
 
 const profileName = document.querySelector('.profile__name');
 const profileDescription = document.querySelector('.profile__description');
@@ -119,16 +121,17 @@ function addCard(title, imageLink) {
     e.target.closest('.element').remove();
   })
   elementImage.addEventListener('click', function(e) {
-    openPopupCard(e.target.src);
+    openPopupCard(e.target.closest('.element').querySelector('.element__title').textContent, e.target.src);
   })
 
 
   return newCard;
 }
 
-function openPopupCard(imageLink) {
+function openPopupCard(titleData, imageLink) {
   popupCard.classList.add('popup_opened');
   popupCardImage.src = imageLink;
+  popupCardTitle.textContent = titleData;
 }
 
 function closePopupCard() {
