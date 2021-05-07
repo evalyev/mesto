@@ -37,42 +37,40 @@
     <p class="footer__text">&copy; 2021 Mesto Russia</p>
   </footer>
 
-  <article>
-    <section class="popup popup_type_edit-profile">
-      <div class="popup__container">
-        <h2 class="popup__title">Редактировать профиль</h2>
-        <form class="popup__form" name="edit-form">
-          <input class="popup__input-text popup__input-text_profile_name" type="text" placeholder="Ваше имя"
-            name="edit-form-name">
-          <input class="popup__input-text popup__input-text_profile_description" type="text" placeholder="Описание"
-            name="edit-form-description">
-          <button class="popup__submit" type="submit">Сохранить</button>
-        </form>
-        <button class="popup__close" type="button"></button>
-      </div>
-    </section>
+  <article class="popup popup_type_edit-profile">
+    <div class="popup__container">
+      <h2 class="popup__title">Редактировать профиль</h2>
+      <form class="popup__form" name="edit-form">
+        <input class="popup__input-text popup__input-text_profile_name" type="text" placeholder="Ваше имя"
+          name="edit-form-name">
+        <input class="popup__input-text popup__input-text_profile_description" type="text" placeholder="Описание"
+          name="edit-form-description">
+        <button class="popup__submit" type="submit">Сохранить</button>
+      </form>
+      <button class="popup__close" type="button"></button>
+    </div>
+  </article>
 
-    <section class="popup popup_type_add-card">
-      <div class="popup__container">
-        <h2 class="popup__title">Новое место</h2>
-        <form class="popup__form" name="edit-form">
-          <input class="popup__input-text popup__input-text_profile_name" type="text" placeholder="Название"
-            name="edit-form-name">
-          <input class="popup__input-text popup__input-text_profile_description" type="text" placeholder="Ссылка на картинку"
-            name="edit-form-description">
-          <button class="popup__submit" type="submit">Создать</button>
-        </form>
-        <button class="popup__close" type="button"></button>
-      </div>
-    </section>
+  <article class="popup popup_type_add-card">
+    <div class="popup__container">
+      <h2 class="popup__title">Новое место</h2>
+      <form class="popup__form" name="edit-form">
+        <input class="popup__input-text popup__input-text_profile_name" type="text" placeholder="Название"
+          name="edit-form-name">
+        <input class="popup__input-text popup__input-text_profile_description" type="text"
+          placeholder="Ссылка на картинку" name="edit-form-description">
+        <button class="popup__submit" type="submit">Создать</button>
+      </form>
+      <button class="popup__close" type="button"></button>
+    </div>
+  </article>
 
-    <section class="popup popup_type_card">
-      <div class="popup__container">
-        <img class="popup__image" src="./images/ivanovo.jpg" alt="&nbsp;">
-        <h2 class="popup__card-title"></h2>
-        <button class="popup__close" type="button"></button>
-      </div>
-    </section>
+  <article class="popup popup_type_card">
+    <div class="popup__container">
+      <img class="popup__image" src="./images/ivanovo.jpg" alt="&nbsp;">
+      <h2 class="popup__card-title"></h2>
+      <button class="popup__close" type="button"></button>
+    </div>
   </article>
 
   <template id="element">

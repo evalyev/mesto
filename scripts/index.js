@@ -29,16 +29,16 @@ initialCards.forEach(item => {
   elementContainer.append(addCard(item.name, item.link));
 })
 
-profileEditButton.addEventListener('click', function() {
+profileEditButton.addEventListener('click', function () {
   openPopup(popupEditProfile);
   profilePopup();
 });
 
 popupEditProfileClose.addEventListener('click', () => closePopup(popupEditProfile));
 
-popupEditProfileForm.addEventListener('submit', submitPopupEditProfile); 
+popupEditProfileForm.addEventListener('submit', submitPopupEditProfile);
 
-profileAddButton.addEventListener('click', function() {
+profileAddButton.addEventListener('click', function () {
   openPopup(popupAddCard);
 })
 
@@ -58,21 +58,22 @@ function closePopup(popup) {
 }
 
 function profilePopup() {
-  popupEditProfileName.value = profileName.textContent; 
+  popupEditProfileName.value = profileName.textContent;
   popupEditProfileDescription.value = profileDescription.textContent;
 }
 
-function submitPopupEditProfile (evt) {
+function submitPopupEditProfile(evt) {
   evt.preventDefault();
   profileName.textContent = popupEditProfileName.value;
   profileDescription.textContent = popupEditProfileDescription.value;
   closePopup(popupEditProfile);
 }
 
-function submitPopupAddCard (evt) {
+function submitPopupAddCard(evt) {
   evt.preventDefault();
   elementContainer.prepend(addCard(popupAddCardTitle.value, popupAddCardImageLink.value));
   closePopup(popupAddCard);
+  popupAddCardForm.reset();
 }
 
 function addCard(title, imageLink) {
@@ -84,15 +85,17 @@ function addCard(title, imageLink) {
   newCard.querySelector('.element__title').textContent = title;
   elementImage.src = imageLink;
   elementImage.alt = title;
-  elementLike.addEventListener('click', function(e) {
+  elementLike.addEventListener('click', function (e) {
     e.target.classList.toggle('element__like_active');
   });
-  elementTrash.addEventListener('click', function(e) {
+  elementTrash.addEventListener('click', function (e) {
     e.target.closest('.element').remove();
   })
-  elementImage.addEventListener('click', function(e) {
+  elementImage.addEventListener('click', function (e) {
+    const popupTitle = e.target.closest('.element').querySelector('.element__title').textContent;
+    const popupLink = e.target.src;
     openPopup(popupCard);
-    openPopupCard(e.target.closest('.element').querySelector('.element__title').textContent, e.target.src);
+    openPopupCard(popupTitle, popupLink);
   })
 
 
