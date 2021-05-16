@@ -40,11 +40,11 @@
   <article class="popup popup_type_edit-profile">
     <div class="popup__container">
       <h2 class="popup__title">Редактировать профиль</h2>
-      <form class="popup__form" name="edit-form">
+      <form class="popup__form" name="edit-form" novalidate>
         <input class="popup__input-text popup__input-text_profile_name" type="text" placeholder="Ваше имя"
-          name="edit-form-name">
+          name="edit-form-name" minlength="2" maxlength="40" required>
         <input class="popup__input-text popup__input-text_profile_description" type="text" placeholder="Описание"
-          name="edit-form-description">
+          name="edit-form-description" minlength="2" maxlength="200" required>
         <button class="popup__submit" type="submit">Сохранить</button>
       </form>
       <button class="popup__close" type="button"></button>
