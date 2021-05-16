@@ -10,6 +10,10 @@
   z-index: 2;
 }
 
+.popup__container:hover {
+  cursor: default;
+}
+
 .popup_type_card .popup__container {
   width: auto;
   background: none;
