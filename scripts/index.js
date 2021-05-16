@@ -32,6 +32,7 @@ initialCards.forEach(item => {
 profileEditButton.addEventListener('click', function () {
   openPopup(popupEditProfile);
   profilePopup();
+  toggleButtonState(Array.from(popupEditProfile.querySelectorAll('popup__input-text')), popupEditProfileSubmit);
 });
 
 popupEditProfileClose.addEventListener('click', () => closePopup(popupEditProfile));
@@ -133,19 +134,8 @@ function isValid(formElement, inputElement) {
   }
 }
 
-function setEventListeners(formElement) {
-  const inputList = Array.from(formElement.querySelectorAll('.popup__input-text'));
-  toggleButtonState(inputList);
-  inputList.forEach(inputElement => {
-    inputElement.addEventListener('input', () => {
-      isValid(formElement, inputElement);
-      toggleButtonState(inputList);
-    });
-  });
-}
-
 function hasInvalidInput(inputList) {
-  inputList.some(inputElement => {
+  return inputList.some(inputElement => {
     return !inputElement.validity.valid;
   });
 }
@@ -153,10 +143,24 @@ function hasInvalidInput(inputList) {
 function toggleButtonState(inputList, buttonElement) {
   if(hasInvalidInput(inputList)) {
     buttonElement.classList.add('popup__submit_inactive');
+    buttonElement.setAttribute('disabled', true);
   }
   else {
     buttonElement.classList.remove('popup__submit_inactive');
+    buttonElement.removeAttribute('disabled');
   }
+}
+
+function setEventListeners(formElement) {
+  const inputList = Array.from(formElement.querySelectorAll('.popup__input-text'));
+  const buttonElement = formElement.querySelector('.popup__submit');
+  toggleButtonState(inputList, buttonElement);
+  inputList.forEach(inputElement => {
+    inputElement.addEventListener('input', () => {
+      isValid(formElement, inputElement);
+      toggleButtonState(inputList, buttonElement);
+    });
+  });
 }
 
 function enableValidation() {
