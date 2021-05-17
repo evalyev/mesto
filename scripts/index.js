@@ -1,19 +1,19 @@
 const popupEditProfile = document.querySelector('.popup_type_edit-profile');
 const popupEditProfileForm = popupEditProfile.querySelector('.popup__form');
-const popupEditProfileName = popupEditProfile.querySelector('.popup__input-text_profile_name');
-const popupEditProfileDescription = popupEditProfile.querySelector('.popup__input-text_profile_description');
-const popupEditProfileClose = popupEditProfile.querySelector('.popup__close');
+const userNameInput = popupEditProfile.querySelector('.popup__input-text_profile_name');
+const userDescriptionInput = popupEditProfile.querySelector('.popup__input-text_profile_description');
+const popupEditProfileCloseBtn = popupEditProfile.querySelector('.popup__close');
 const popupEditProfileTitle = popupEditProfile.querySelector('.popup__title')
-const popupEditProfileSubmit = popupEditProfile.querySelector('.popup__submit');
+const popupEditProfileSubmitBtn = popupEditProfile.querySelector('.popup__submit');
 
 const popupAddCard = document.querySelector('.popup_type_add-card');
 const popupAddCardForm = popupAddCard.querySelector('.popup__form');
-const popupAddCardTitle = popupAddCard.querySelector('.popup__input-text_profile_name');
-const popupAddCardImageLink = popupAddCard.querySelector('.popup__input-text_profile_description');
-const popupAddCardClose = popupAddCard.querySelector('.popup__close');
+const cardTitleInput = popupAddCard.querySelector('.popup__input-text_profile_name');
+const cardLinkInput = popupAddCard.querySelector('.popup__input-text_profile_description');
+const popupAddCardCloseBtn = popupAddCard.querySelector('.popup__close');
 
 const popupCard = document.querySelector('.popup_type_card');
-const popupCardClose = popupCard.querySelector('.popup__close');
+const popupCardCloseBtn = popupCard.querySelector('.popup__close');
 const popupCardImage = popupCard.querySelector('.popup__image');
 const popupCardTitle = popupCard.querySelector('.popup__card-title')
 
@@ -32,10 +32,10 @@ initialCards.forEach(item => {
 profileEditButton.addEventListener('click', function () {
   openPopup(popupEditProfile);
   profilePopup();
-  toggleButtonState(Array.from(popupEditProfile.querySelectorAll('popup__input-text')), popupEditProfileSubmit);
+  toggleButtonState(Array.from(popupEditProfile.querySelectorAll('popup__input-text')), popupEditProfileSubmitBtn);
 });
 
-popupEditProfileClose.addEventListener('click', () => closePopup(popupEditProfile));
+popupEditProfileCloseBtn.addEventListener('click', () => closePopup(popupEditProfile));
 
 popupEditProfile.addEventListener('click', evt => {
   if(evt.target.classList.contains('popup_opened')){
@@ -51,7 +51,7 @@ profileAddButton.addEventListener('click', function () {
 
 popupAddCardForm.addEventListener('submit', submitPopupAddCard);
 
-popupAddCardClose.addEventListener('click', () => closePopup(popupAddCard));
+popupAddCardCloseBtn.addEventListener('click', () => closePopup(popupAddCard));
 
 popupAddCard.addEventListener('click', evt => {
   if(evt.target.classList.contains('popup_opened')) {
@@ -59,7 +59,7 @@ popupAddCard.addEventListener('click', evt => {
   }
 });
 
-popupCardClose.addEventListener('click', () => closePopup(popupCard));
+popupCardCloseBtn.addEventListener('click', () => closePopup(popupCard));
 
 popupCard.addEventListener('click', evt => {
   if(evt.target.classList.contains('popup_opened')) {
@@ -85,20 +85,20 @@ function closePopup(popup) {
 }
 
 function profilePopup() {
-  popupEditProfileName.value = profileName.textContent;
-  popupEditProfileDescription.value = profileDescription.textContent;
+  userNameInput.value = profileName.textContent;
+  userDescriptionInput.value = profileDescription.textContent;
 }
 
 function submitPopupEditProfile(evt) {
   evt.preventDefault();
-  profileName.textContent = popupEditProfileName.value;
-  profileDescription.textContent = popupEditProfileDescription.value;
+  profileName.textContent = userNameInput.value;
+  profileDescription.textContent = userDescriptionInput.value;
   closePopup(popupEditProfile);
 }
 
 function submitPopupAddCard(evt) {
   evt.preventDefault();
-  elementContainer.prepend(addCard(popupAddCardTitle.value, popupAddCardImageLink.value));
+  elementContainer.prepend(addCard(cardTitleInput.value, cardLinkInput.value));
   closePopup(popupAddCard);
   popupAddCardForm.reset();
   toggleButtonState(Array.from(popupAddCardForm.querySelectorAll('.popup__input-text')), popupAddCardForm.querySelector('.popup__submit'));
