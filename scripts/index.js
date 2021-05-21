@@ -47,14 +47,6 @@ function closePopup(popup) {
 
   popup.classList.remove('popup_opened');
   document.removeEventListener('keydown', closePopupEsc);
-  if (!popup.classList.contains('popup_type_card')) {
-    const inputList = Array.from(formElement.querySelectorAll('.popup__input-text'));
-
-    formElement.reset();
-    inputList.forEach(inputElement => {
-      hideInputError(formElement, inputElement, config);
-    });
-  }
 }
 
 function closePopupEsc(evt) {
@@ -77,11 +69,21 @@ function submitPopupEditProfile(evt) {
 }
 
 function submitPopupAddCard(evt) {
+  const {submitButtonInactiveClass} = config;
   evt.preventDefault();
   elementContainer.prepend(createCard(cardTitleInput.value, cardLinkInput.value));
   closePopup(popupAddCard);
   popupAddCardForm.reset();
-  toggleButtonState(cardInputList, popupAddCardSubmitBtn);
+  toggleButtonState(cardInputList, popupAddCardSubmitBtn, submitButtonInactiveClass);
+}
+
+function resetForm(formElement, buttonElement, { submitButtonInactiveClass, ...restConfig }, needClean) {
+  const inputList = Array.from(formElement.querySelectorAll('.popup__input-text'));
+  if (needClean) formElement.reset();
+  inputList.forEach(inputElement => {
+    hideInputError(formElement, inputElement, restConfig);
+  });
+  toggleButtonState(inputList, buttonElement, submitButtonInactiveClass);
 }
 
 function createCard(title, imageLink) {
@@ -124,8 +126,9 @@ initialCards.forEach(item => {
 enableValidation(config);
 
 profileEditButton.addEventListener('click', function () {
-  openPopup(popupEditProfile);
   fillEditProfilePopupFields();
+  resetForm(popupEditProfileForm, popupEditProfileSubmitBtn, config, false);
+  openPopup(popupEditProfile);
   toggleButtonState(profileInputList, popupEditProfileSubmitBtn);
 });
 
@@ -140,6 +143,7 @@ popupEditProfile.addEventListener('click', evt => {
 popupEditProfileForm.addEventListener('submit', submitPopupEditProfile);
 
 profileAddButton.addEventListener('click', function () {
+  resetForm(popupAddCardForm, popupEditProfileSubmitBtn, config, true);
   openPopup(popupAddCard);
 })
 
