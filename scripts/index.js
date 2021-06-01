@@ -183,15 +183,11 @@ initialCards.forEach(item => {
 })
 
 //enableValidation(config);
-/*
-Array.from(document.querySelectorAll('.popup')).forEach(popup => {
-  const formElement = popup.querySelector(config.formSelector);
-  const formValidator = new FormValidator(config, formElement);
-  formValidator.enableValidation();
-});*/
 
-const formValidator = new FormValidator(config, popupEditProfileForm);
-formValidator.enableValidation();
+const editProfileFormValidator = new FormValidator(config, popupEditProfileForm);
+editProfileFormValidator.enableValidation();
+const addCardFormValidator = new FormValidator(config, popupAddCardForm);
+addCardFormValidator.enableValidation();
 
 profileEditButton.addEventListener('click', function () {
   fillEditProfilePopupFields();
