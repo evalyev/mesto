@@ -1,3 +1,5 @@
+import {openPopup, popupCard} from './index.js';
+
 export class Card {
   constructor(title, imageLink, templateSelector) {
     this._title = title;
@@ -26,7 +28,14 @@ export class Card {
   _openCard(e) {
     const popupTitle = e.target.closest('.element').querySelector('.element__title').textContent;
     const popupLink = e.target.src;
-    openPopupCard(popupCard, popupTitle, popupLink);
+    this._openPopupCard();
+  }
+
+  _openPopupCard() {
+    openPopup(popupCard);
+    popupCardImage.src = imageLink;
+    popupCardImage.alt = titleData;
+    popupCardTitle.textContent = titleData;
   }
 
   _setEventListeners() {
