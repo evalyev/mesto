@@ -1,3 +1,6 @@
+import {Card} from './Card.js';
+import {FormValidator} from './FormValidator.js';
+
 const popupEditProfile = document.querySelector('.popup_type_edit-profile');
 const popupEditProfileForm = popupEditProfile.querySelector('.popup__form');
 const userNameInput = popupEditProfile.querySelector('.popup__input-text_profile_name');
@@ -28,6 +31,33 @@ const profileAddButton = document.querySelector('.profile__add-button');
 const elementContainer = document.querySelector('.elements');
 const cardTemplate = document.querySelector('#element');
 
+const initialCards = [
+  {
+    name: 'Архыз',
+    link: './images/arkhyz.jpg'
+  },
+  {
+    name: 'Челябинская область',
+    link: './images/chelyabinsk-oblast.jpg'
+  },
+  {
+    name: 'Иваново',
+    link: './images/ivanovo.jpg'
+  },
+  {
+    name: 'Камчатка',
+    link: './images/kamchatka.jpg'
+  },
+  {
+    name: 'Холмогорский район',
+    link: './images/kholmogorsky-rayon.jpg'
+  },
+  {
+    name: 'Байкал',
+    link: './images/baikal.jpg'
+  }
+]; 
+
 const config = {
   formSelector: '.popup__form',
   inputSelector: '.popup__input-text',
@@ -36,61 +66,6 @@ const config = {
   errorActiveClass: 'popup__input-error_active',
   submitButtonInactiveClass: 'popup__submit_inactive'
 };
-
-class Card {
-  constructor(title, imageLink, templateSelector) {
-    this._title = title;
-    this._imageLink = imageLink;
-    this._templateSelector = templateSelector;
-  }
-
-  _getTemplate() {
-    const cardElement = document
-      .querySelector(this._templateSelector)
-      .content
-      .querySelector('.element')
-      .cloneNode(true);
-  
-    return cardElement;
-  }
-
-  _toggleLike(e) {
-    e.target.classList.toggle('element__like_active');
-  }
-
-  _removeElement(e) {
-    e.target.closest('.element').remove();
-  }
-
-  _openCard(e) {
-    const popupTitle = e.target.closest('.element').querySelector('.element__title').textContent;
-    const popupLink = e.target.src;
-    openPopupCard(popupCard, popupTitle, popupLink);
-  }
-
-  _setEventListeners() {
-    this._element.querySelector('.element__like').addEventListener('click', (e) =>{
-      this._toggleLike(e);
-    });
-    this._element.querySelector('.element__trash').addEventListener('click', (e) =>{
-      this._removeElement(e);
-    });
-    this._element.querySelector('.element__image').addEventListener('click', (e) =>{
-      this._openCard(e);
-    });
-  }
-
-  generateCard() {
-    this._element = this._getTemplate();
-    this._setEventListeners();
-  
-    this._element.querySelector('.element__image').src = this._imageLink;
-    this._element.querySelector('.element__title').textContent = this._title;
-  
-    // Вернём элемент наружу
-    return this._element;
-  } 
-}
 
 function openPopup(popup) {
   popup.classList.add('popup_opened');
