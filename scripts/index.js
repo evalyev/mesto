@@ -182,7 +182,16 @@ initialCards.forEach(item => {
   elementContainer.append(cardElement);
 })
 
-enableValidation(config);
+//enableValidation(config);
+/*
+Array.from(document.querySelectorAll('.popup')).forEach(popup => {
+  const formElement = popup.querySelector(config.formSelector);
+  const formValidator = new FormValidator(config, formElement);
+  formValidator.enableValidation();
+});*/
+
+const formValidator = new FormValidator(config, popupEditProfileForm);
+formValidator.enableValidation();
 
 profileEditButton.addEventListener('click', function () {
   fillEditProfilePopupFields();
