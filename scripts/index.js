@@ -175,7 +175,11 @@ function openPopupCard(popupCard, titleData, imageLink) {
 
 
 initialCards.forEach(item => {
-  elementContainer.append(createCard(item.name, item.link));
+  //elementContainer.append(createCard(item.name, item.link));
+  const card = new Card(item.name, item.link, '#element');
+  const cardElement = card.generateCard();
+
+  elementContainer.append(cardElement);
 })
 
 enableValidation(config);
