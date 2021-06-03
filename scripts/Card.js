@@ -1,4 +1,4 @@
-import {openPopup, popupCard} from './index.js';
+import {openPopup, popupCard, popupCardImage, popupCardTitle} from './index.js';
 
 export class Card {
   constructor(title, imageLink, templateSelector) {
@@ -33,9 +33,9 @@ export class Card {
 
   _openPopupCard() {
     openPopup(popupCard);
-    popupCardImage.src = imageLink;
-    popupCardImage.alt = titleData;
-    popupCardTitle.textContent = titleData;
+    popupCardImage.src = this._imageLink;
+    popupCardImage.alt = this._title;
+    popupCardTitle.textContent = this._title;
   }
 
   _setEventListeners() {

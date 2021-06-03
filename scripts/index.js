@@ -20,8 +20,8 @@ const popupAddCardSubmitBtn = popupAddCardForm.querySelector('.popup__submit');
 
 export const popupCard = document.querySelector('.popup_type_card');
 const popupCardCloseBtn = popupCard.querySelector('.popup__close');
-const popupCardImage = popupCard.querySelector('.popup__image');
-const popupCardTitle = popupCard.querySelector('.popup__card-title')
+export const popupCardImage = popupCard.querySelector('.popup__image');
+export const popupCardTitle = popupCard.querySelector('.popup__card-title')
 
 const profileName = document.querySelector('.profile__name');
 const profileDescription = document.querySelector('.profile__description');
