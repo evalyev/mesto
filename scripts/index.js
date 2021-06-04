@@ -73,8 +73,6 @@ export function openPopup(popup) {
 }
 
 function closePopup(popup) {
-  const formElement = popup.querySelector('.popup__form');
-
   popup.classList.remove('popup_opened');
   document.removeEventListener('keydown', closePopupEsc);
 }
@@ -156,13 +154,10 @@ function openPopupCard(popupCard, titleData, imageLink) {
 
 
 initialCards.forEach(item => {
-  //elementContainer.append(createCard(item.name, item.link));
   const cardElement = createCard(item.name, item.link);
 
   elementContainer.append(cardElement);
 });
-
-//enableValidation(config);
 
 const editProfileFormValidator = new FormValidator(config, popupEditProfileForm);
 editProfileFormValidator.enableValidation();

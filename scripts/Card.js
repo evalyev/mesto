@@ -21,14 +21,8 @@ export class Card {
     e.target.classList.toggle('element__like_active');
   }
 
-  _removeElement(e) {
-    e.target.closest('.element').remove();
-  }
-
-  _openCard(e) {
-    const popupTitle = e.target.closest('.element').querySelector('.element__title').textContent;
-    const popupLink = e.target.src;
-    this._openPopupCard();
+  _removeElement() {
+    this._element.remove();
   }
 
   _openPopupCard() {
@@ -42,19 +36,21 @@ export class Card {
     this._element.querySelector('.element__like').addEventListener('click', (e) =>{
       this._toggleLike(e);
     });
-    this._element.querySelector('.element__trash').addEventListener('click', (e) =>{
-      this._removeElement(e);
+    this._element.querySelector('.element__trash').addEventListener('click', () =>{
+      this._removeElement();
     });
-    this._element.querySelector('.element__image').addEventListener('click', (e) =>{
-      this._openCard(e);
+    this._element.querySelector('.element__image').addEventListener('click', () =>{
+      this._openPopupCard();
     });
   }
 
   generateCard() {
     this._element = this._getTemplate();
+    this._elementImage = this._element.querySelector('.element__image');
     this._setEventListeners();
   
-    this._element.querySelector('.element__image').src = this._imageLink;
+    this._elementImage.src = this._imageLink;
+    this._elementImage.alt = this._title;
     this._element.querySelector('.element__title').textContent = this._title;
   
     // Вернём элемент наружу
