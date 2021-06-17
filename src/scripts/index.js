@@ -36,27 +36,27 @@ const cardTemplate = document.querySelector('#element');
 const initialCards = [
   {
     name: 'Архыз',
-    link: './images/arkhyz.jpg'
+    link: new URL('../images/arkhyz.jpg', import.meta.url)
   },
   {
     name: 'Челябинская область',
-    link: './images/chelyabinsk-oblast.jpg'
+    link: new URL('../images/chelyabinsk-oblast.jpg', import.meta.url)
   },
   {
     name: 'Иваново',
-    link: './images/ivanovo.jpg'
+    link: new URL('../images/ivanovo.jpg', import.meta.url)
   },
   {
     name: 'Камчатка',
-    link: './images/kamchatka.jpg'
+    link: new URL('../images/kamchatka.jpg', import.meta.url)
   },
   {
     name: 'Холмогорский район',
-    link: './images/kholmogorsky-rayon.jpg'
+    link: new URL('../images/kholmogorsky-rayon.jpg', import.meta.url)
   },
   {
     name: 'Байкал',
-    link: './images/baikal.jpg'
+    link: new URL('../images/baikal.jpg', import.meta.url)
   }
 ]; 
 
