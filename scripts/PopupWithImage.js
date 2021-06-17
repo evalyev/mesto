@@ -1,7 +1,7 @@
 import Popup from './Popup.js';
 
 class PopupWithImage extends Popup {
-  open(imageLink, titleData) {
+  open(titleData, imageLink) {
     super.open();
     this._cardImage = this._popup.querySelector('.popup__image');
     this._cardTitle = this._popup.querySelector('.popup__card-title');

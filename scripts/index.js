@@ -115,7 +115,12 @@ function resetForm(formElement, buttonElement, { submitButtonInactiveClass, ...r
 }
 
 function createCard(title, imageLink) {
-  const card = new Card(title, imageLink, '#element');
+  const card = new Card(title, imageLink, '#element', {
+    handleCardClick: (title, imageLink) => {
+      const popup = new PopupWithImage('.popup_type_card');
+      popup.open(title, imageLink);
+    }
+  });
   const cardElement = card.generateCard();
 
   return cardElement;
