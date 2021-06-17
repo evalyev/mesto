@@ -1,6 +1,6 @@
 import Popup from './Popup.js';
 
-class PopupWithImage extends Popup {
+export default class PopupWithImage extends Popup {
   open(titleData, imageLink) {
     super.open();
     this._cardImage = this._popup.querySelector('.popup__image');

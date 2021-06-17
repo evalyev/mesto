@@ -1,5 +1,3 @@
-import {openPopup, popupCard, popupCardImage, popupCardTitle} from './index.js';
-
 export class Card {
   constructor(title, imageLink, templateSelector, {handleCardClick}) {
     this._title = title;
@@ -24,13 +22,6 @@ export class Card {
 
   _removeElement() {
     this._element.remove();
-  }
-
-  _openPopupCard() {
-    openPopup(popupCard);
-    popupCardImage.src = this._imageLink;
-    popupCardImage.alt = this._title;
-    popupCardTitle.textContent = this._title;
   }
 
   _setEventListeners() {
