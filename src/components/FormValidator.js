@@ -55,10 +55,10 @@ export class FormValidator {
         this._toggleButtonState();
       });
     });
-    this._formElement.addEventListener("reset", this.closeForm.bind(this));
+    this._formElement.addEventListener("reset", this._closeForm.bind(this));
   }
 
-  closeForm() {
+  _closeForm() {
     if(!this._popup.classList.contains("popup_opened")) {
       this._formElement.reset();
       this._inputList.forEach((inputElement) => {
@@ -69,7 +69,8 @@ export class FormValidator {
         this._buttonElement.removeAttribute('disabled');
       }
       else {
-        this._toggleButtonState();
+        this._buttonElement.classList.add(this._config.submitButtonInactiveClass);
+        this._buttonElement.setAttribute('disabled', true);
       }
     }
   }
@@ -79,6 +80,6 @@ export class FormValidator {
       evt.preventDefault();
     });
     this._setEventListeners();
-    this.closeForm();
+    this._closeForm();
   }
 }
