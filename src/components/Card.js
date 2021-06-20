@@ -31,7 +31,7 @@ export class Card {
     this._element.querySelector('.element__trash').addEventListener('click', () =>{
       this._removeElement();
     });
-    this._element.querySelector('.element__image').addEventListener('click', () =>{
+    this._elementImage.addEventListener('click', () =>{
       this._handleCardClick(this._title, this._imageLink);
     });
   }

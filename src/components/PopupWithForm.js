@@ -5,21 +5,14 @@ export default class PopupWithForm extends Popup {
     super(popupSelector);
     this._handleFormSubmit = handleFormSubmit;
 
-    this._inputTitle = this._popup.querySelector('.popup__input-text_profile_name');
-    this._inputDescription = this._popup.querySelector('.popup__input-text_profile_description');
     this._form = this._popup.querySelector('.popup__form');
+    this._inputList = Array.from(this._form.querySelectorAll('input'));
   }
 
   _getInputValues() {
-    const inputData = {};
-    inputData.inputTitleData = this._inputTitle.value;
-    inputData.inputDescriptionData = this._inputDescription.value;
-    return inputData;
-  }
-
-  setInputValues(dataTitle, dataDescription) {
-    this._inputTitle.value = dataTitle;
-    this._inputDescription.value = dataDescription;
+    const formValues = {};
+    this._inputList.forEach(input => formValues[input.name] = input.value);
+    return formValues;
   }
 
   close() {

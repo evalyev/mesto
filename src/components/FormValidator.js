@@ -2,7 +2,6 @@ export class FormValidator {
   constructor(config, formElement) {
     this._config = config;
     this._formElement = formElement;
-    this._popup = formElement.closest(".popup");
   }
 
   _showInputError(inputElement, errorMessage) {
@@ -55,24 +54,17 @@ export class FormValidator {
         this._toggleButtonState();
       });
     });
-    this._formElement.addEventListener("reset", this._closeForm.bind(this));
-  }
-
-  _closeForm() {
-    if(!this._popup.classList.contains("popup_opened")) {
-      this._formElement.reset();
+    this._formElement.addEventListener("reset", () => {
+      this._disableButton();
       this._inputList.forEach((inputElement) => {
         this._hideInputError(inputElement);
       });
-      if(this._popup.classList.contains("popup_type_edit-profile")) {
-        this._buttonElement.classList.remove(this._config.submitButtonInactiveClass);
-        this._buttonElement.removeAttribute('disabled');
-      }
-      else {
-        this._buttonElement.classList.add(this._config.submitButtonInactiveClass);
-        this._buttonElement.setAttribute('disabled', true);
-      }
-    }
+    });
+  }
+
+  _disableButton() {
+    this._buttonElement.classList.add(this._config.submitButtonInactiveClass);
+    this._buttonElement.setAttribute('disabled', true);
   }
 
   enableValidation() {
@@ -80,6 +72,5 @@ export class FormValidator {
       evt.preventDefault();
     });
     this._setEventListeners();
-    this._closeForm();
   }
 }
