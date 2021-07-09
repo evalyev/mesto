@@ -14,6 +14,24 @@ export default class Section {
     })
       .then(res => {
         if(res.ok) {
+
+          return res.json();
+        }
+        throw res.status;
+      })
+  }
+
+  addCard(title, description) {
+    return fetch(this._url, {
+      method: 'POST',
+      headers: this._headers,
+      body: JSON.stringify({
+        name: title,
+        link: description
+      })
+    })
+      .then(res => {
+        if(res.ok) {
           return res.json();
         }
         throw res.status;
@@ -31,6 +49,8 @@ export default class Section {
 
   addItem(element) {
     this._container.prepend(element);
+
+
   }
 }
 

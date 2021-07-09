@@ -88,9 +88,13 @@ popupUserInfo.setEventListeners();
 const popupCardInfo = new PopupWithForm({
   popupSelector: '.popup_type_add-card',
   handleFormSubmit: (data) => {
-    const cardElement = createCard(data['edit-form-name'], data['edit-form-description']);
-    section.addItem(cardElement);
-    popupCardInfo.close();
+
+    section.addCard(data['edit-form-name'], data['edit-form-description'])
+      .then(() => {
+        const cardElement = createCard(data['edit-form-name'], data['edit-form-description']);
+        section.addItem(cardElement);
+        popupCardInfo.close();
+      })
   }
 });
 popupCardInfo.setEventListeners();
