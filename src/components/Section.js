@@ -37,6 +37,24 @@ export default class Section {
       })
   }
 
+  removeCard(cardId, card) {
+
+    fetch(this._url + '/' + cardId, {
+      method: 'DELETE',
+      headers: this._headers,
+    })
+      .then(res => {
+        if(res.ok) {
+          return res.json();
+        }
+        throw res.status;
+      })
+      .then(res => {
+        card.remove();
+      })
+
+  }
+
   rendererItems() {
     this.getCards()
       .then(items => {

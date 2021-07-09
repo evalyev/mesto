@@ -1,9 +1,10 @@
 export class Card {
-  constructor(title, imageLink, likes, ownerId, userId, templateSelector, { handleCardClick, handleCardTrash }) {
+  constructor(title, imageLink, likes, ownerId, userId, cardId, templateSelector, { handleCardClick, handleCardTrash }) {
     this._title = title;
     this._imageLink = imageLink;
     this._likes = likes;
     this._ownerId = ownerId;
+    this._cardId = cardId;
     this._userId = userId;
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
@@ -35,8 +36,8 @@ export class Card {
 
     if (this._ownerId === this._userId) {
       this._element.querySelector('.element__trash').addEventListener('click', () => {
-        this._removeElement();
-        this._handleCardTrash();
+        // this._removeElement();
+        this._handleCardTrash(this._cardId);
       });
     }
 

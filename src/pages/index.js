@@ -12,8 +12,8 @@ import {
   options
 } from '../utils/constats.js';
 
-import {Card} from '../components/Card.js';
-import {FormValidator} from '../components/FormValidator.js';
+import { Card } from '../components/Card.js';
+import { FormValidator } from '../components/FormValidator.js';
 import Section from '../components/Section.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
@@ -47,16 +47,34 @@ userInfo.getUserInfo()
     userInfo.setAvatar(data.avatar);
   })
 
-const popupDelete = new PopupWithButton('.popup_type_delete');
+const section = new Section(
+  {
+    items: initialCards,
+    renderer: (cardItem) => {
+      const cardElement = createCard(cardItem.name, cardItem.link, cardItem.likes.length, cardItem.owner, cardItem._id);
+      section.addItem(cardElement);
+    }
+  }, '.elements', options);
+
+section.rendererItems();
+
+const popupDelete = new PopupWithButton({
+  popupSelector: '.popup_type_delete',
+  formSelector: '.popup__form',
+  handleFormSubmit: (cardId, card) => {
+    popupDelete.close();
+    section.removeCard(cardId, card);
+  }
+});
 popupDelete.setEventListeners();
 
-function createCard(title, imageLink, likes, owner) {
-  const card = new Card(title, imageLink, likes, owner._id, userInfo.getUserId(), '#element', {
+function createCard(title, imageLink, likes, owner, cardId) {
+  const card = new Card(title, imageLink, likes, owner._id, userInfo.getUserId(), cardId, '#element', {
     handleCardClick: (title, imageLink) => {
       popupWithImage.open(title, imageLink);
     },
-    handleCardTrash: () => {
-      popupDelete.open();
+    handleCardTrash: (cardId) => {
+      popupDelete.open(cardId, cardElement);
     }
   });
   const cardElement = card.generateCard();
@@ -64,16 +82,7 @@ function createCard(title, imageLink, likes, owner) {
   return cardElement;
 }
 
-const section = new Section(
-  {
-    items: initialCards,
-    renderer: (cardItem) => {
-      const cardElement = createCard(cardItem.name, cardItem.link, cardItem.likes.length, cardItem.owner);
-      section.addItem(cardElement);
-    }
-  }, '.elements', options);
 
-section.rendererItems();
 
 const editProfileFormValidator = new FormValidator(config, popupEditProfileForm);
 editProfileFormValidator.enableValidation();
@@ -95,8 +104,8 @@ const popupCardInfo = new PopupWithForm({
   handleFormSubmit: (data) => {
 
     section.addCard(data['edit-form-name'], data['edit-form-description'])
-      .then(() => {
-        const cardElement = createCard(data['edit-form-name'], data['edit-form-description'], 0, userInfo.getUserId());
+      .then((res) => {
+        const cardElement = createCard(data['edit-form-name'], data['edit-form-description'], 0, userInfo.getUserId(), res._id);
         section.addItem(cardElement);
         popupCardInfo.close();
       })
