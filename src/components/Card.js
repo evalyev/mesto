@@ -1,7 +1,8 @@
 export class Card {
-  constructor(title, imageLink, templateSelector, {handleCardClick}) {
+  constructor(title, imageLink, likes, templateSelector, {handleCardClick}) {
     this._title = title;
     this._imageLink = imageLink;
+    this._likes = likes;
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
   }
@@ -44,6 +45,7 @@ export class Card {
     this._elementImage.src = this._imageLink;
     this._elementImage.alt = this._title;
     this._element.querySelector('.element__title').textContent = this._title;
+    this._element.querySelector('.element__like-amount').textContent = this._likes;
   
     // Вернём элемент наружу
     return this._element;

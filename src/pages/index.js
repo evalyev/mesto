@@ -27,8 +27,8 @@ api.getUserInfo();
 const popupWithImage = new PopupWithImage('.popup_type_card', '.popup__image', '.popup__card-title');
 popupWithImage.setEventListeners();
 
-function createCard(title, imageLink) {
-  const card = new Card(title, imageLink, '#element', {
+function createCard(title, imageLink, likes) {
+  const card = new Card(title, imageLink, likes, '#element', {
     handleCardClick: (title, imageLink) => {
       popupWithImage.open(title, imageLink);
     }
@@ -42,7 +42,7 @@ const section = new Section(
   {
     items: initialCards,
     renderer: (cardItem) => {
-      const cardElement = createCard(cardItem.name, cardItem.link);
+      const cardElement = createCard(cardItem.name, cardItem.link, cardItem.likes.length);
       section.addItem(cardElement);
     }
   }, '.elements', options);
@@ -91,7 +91,7 @@ const popupCardInfo = new PopupWithForm({
 
     section.addCard(data['edit-form-name'], data['edit-form-description'])
       .then(() => {
-        const cardElement = createCard(data['edit-form-name'], data['edit-form-description']);
+        const cardElement = createCard(data['edit-form-name'], data['edit-form-description'], 0);
         section.addItem(cardElement);
         popupCardInfo.close();
       })
