@@ -74,6 +74,19 @@
     </div>
   </article>
 
+  <article class="popup popup_type_avatar">
+    <div class="popup__container">
+      <h2 class="popup__title">Обновить аватар</h2>
+      <form class="popup__form" name="edit-form" novalidate>
+        <input class="popup__input-text popup__input-text_profile_description" id="input-text-url" type="url"
+          placeholder="Ссылка на картинку" name="edit-form-description" required>
+        <span class="input-text-url-error popup__input-error"></span>
+        <button class="popup__submit" type="submit">Сохранить</button>
+      </form>
+      <button class="popup__close" type="button"></button>
+    </div>
+  </article>
+
   <article class="popup popup_type_card">
     <div class="popup__container">
       <img class="popup__image" src="<%=require('./images/ivanovo.jpg')%>" alt="&nbsp;">

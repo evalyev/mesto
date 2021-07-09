@@ -36,7 +36,7 @@ export default class UserInfo {
 
   setUserInfo(dataUserName, dataUserInfo) {
 
-    fetch(this._url, {
+    return fetch(this._url, {
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
@@ -55,6 +55,21 @@ export default class UserInfo {
   }
 
   setAvatar(imageLink) {
-    this._avatar.src = imageLink;
+
+    return fetch(this._url + '/avatar', {
+      method: 'PATCH',
+      headers: this._headers,
+      body: JSON.stringify({
+        avatar: imageLink,
+      })
+    })
+      .then(res => {
+        if(res.ok) {
+          this._avatar.src = imageLink;
+          return res.json();
+        }
+        throw res.status;
+      })
+
   }
 }

@@ -6,7 +6,13 @@ import {
   popupEditProfileTitle,
   popupEditProfileDescription,
   profileEditButton,
+  popupEditCardBtn,
+  popupAddCardBtn,
   profileAddButton,
+  profileEditAvatar,
+  popupEditAvatar,
+  popupEditAvatarBtn,
+  popupEditAvatarForm,
   initialCards,
   config,
   options
@@ -46,6 +52,7 @@ userInfo.getUserInfo()
     userInfo.setUserInfo(data.name, data.about);
     userInfo.setAvatar(data.avatar);
   })
+
 
 const section = new Section(
   {
@@ -103,13 +110,21 @@ const editProfileFormValidator = new FormValidator(config, popupEditProfileForm)
 editProfileFormValidator.enableValidation();
 const addCardFormValidator = new FormValidator(config, popupAddCardForm);
 addCardFormValidator.enableValidation();
+const editavatarValidator = new FormValidator(config, popupEditAvatarForm);
+editavatarValidator.enableValidation();
 
 
 const popupUserInfo = new PopupWithForm({
   popupSelector: '.popup_type_edit-profile',
   handleFormSubmit: (data) => {
-    userInfo.setUserInfo(data['edit-form-name'], data['edit-form-description']);
-    popupUserInfo.close();
+    popupEditCardBtn.textContent += '...';
+
+    userInfo.setUserInfo(data['edit-form-name'], data['edit-form-description'])
+    .then(res => {
+      popupEditCardBtn.textContent = "Сохранить";
+      popupUserInfo.close();
+    })
+    
   }
 });
 popupUserInfo.setEventListeners();
@@ -118,8 +133,11 @@ const popupCardInfo = new PopupWithForm({
   popupSelector: '.popup_type_add-card',
   handleFormSubmit: (data) => {
 
+    popupAddCardBtn.textContent += '...';
+
     section.addCard(data['edit-form-name'], data['edit-form-description'])
       .then((res) => {
+        popupAddCardBtn.textContent = 'Создать';
         const cardElement = createCard(data['edit-form-name'], data['edit-form-description'], 0, userInfo.getUserId(), res._id, false);
         section.addItem(cardElement);
         popupCardInfo.close();
@@ -127,6 +145,8 @@ const popupCardInfo = new PopupWithForm({
   }
 });
 popupCardInfo.setEventListeners();
+
+
 
 profileEditButton.addEventListener('click', function () {
 
@@ -141,4 +161,24 @@ profileEditButton.addEventListener('click', function () {
 profileAddButton.addEventListener('click', function () {
   popupCardInfo.open();
 
+});
+
+const popupAvatar = new PopupWithForm({
+  popupSelector: '.popup_type_avatar',
+  handleFormSubmit: (data) => {
+    
+    popupEditAvatarBtn.textContent += '...';
+
+    userInfo.setAvatar(data['edit-form-description'])
+      .then((res) => {
+        popupEditAvatarBtn.textContent = 'Сохранить';
+
+        popupAvatar.close();
+      })
+  }
+});
+popupAvatar.setEventListeners();
+
+profileEditAvatar.addEventListener('click', () => {
+  popupAvatar.open();
 });

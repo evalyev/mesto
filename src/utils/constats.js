@@ -2,12 +2,19 @@ export const popupEditProfile = document.querySelector('.popup_type_edit-profile
 export const popupEditProfileForm = popupEditProfile.querySelector('.popup__form');
 export const popupEditProfileTitle = popupEditProfileForm.querySelector('.popup__input-text_profile_name');
 export const popupEditProfileDescription = popupEditProfileForm.querySelector('.popup__input-text_profile_description');
+export const popupEditCardBtn = popupEditProfileForm.querySelector('.popup__submit');
 
 export const popupAddCard = document.querySelector('.popup_type_add-card');
 export const popupAddCardForm = popupAddCard.querySelector('.popup__form');
+export const popupAddCardBtn = popupAddCardForm.querySelector('.popup__submit');
+
+export const popupEditAvatar = document.querySelector('.popup_type_avatar');
+export const popupEditAvatarForm = popupEditAvatar.querySelector('.popup__form');
+export const popupEditAvatarBtn = popupEditAvatarForm.querySelector('.popup__submit');
 
 export const profileEditButton = document.querySelector('.profile__edit-button');
 export const profileAddButton = document.querySelector('.profile__add-button');
+export const profileEditAvatar = document.querySelector('.profile__btn-av-container');
 
 export const initialCards = [
   {

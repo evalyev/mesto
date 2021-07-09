@@ -4,12 +4,12 @@
   background: none;
   width: 26px;
   height: 26px;
+}
+
+.profile__btn-av-container:hover .profile__btn-avatar {
+  cursor: pointer;
   background-image: url(../../../images/profile_edit-avatar.svg);
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-}
-
-.profile__btn-avatar:hover {
-  cursor: pointer;
 }
