@@ -44,3 +44,11 @@ export const config = {
   errorActiveClass: 'popup__input-error_active',
   submitButtonInactiveClass: 'popup__submit_inactive'
 };
+
+export const options = {
+  url: 'https://mesto.nomoreparties.co/v1/cohort-25',
+  headers: {
+    'Content-type': 'application/json',
+    'authorization': "fde5bb74-e309-4d0b-b20e-21b47420feea"
+  }
+}

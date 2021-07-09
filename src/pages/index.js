@@ -8,7 +8,8 @@ import {
   profileEditButton,
   profileAddButton,
   initialCards,
-  config
+  config,
+  options
 } from '../utils/constats.js';
 
 import {Card} from '../components/Card.js';
@@ -17,7 +18,11 @@ import Section from '../components/Section.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
+import Api from '../components/Api.js';
 
+
+const api = new Api(options);
+api.getUserInfo();
 
 const popupWithImage = new PopupWithImage('.popup_type_card', '.popup__image', '.popup__card-title');
 popupWithImage.setEventListeners();
@@ -40,7 +45,7 @@ const section = new Section(
       const cardElement = createCard(cardItem.name, cardItem.link);
       section.addItem(cardElement);
     }
-  }, '.elements');
+  }, '.elements', options);
 
 section.rendererItems();
 
@@ -51,8 +56,25 @@ addCardFormValidator.enableValidation();
 
 const userInfo = new UserInfo({
   userNameSelector: '.profile__name',
-  userInfoSelector: '.profile__description'
-});
+  userInfoSelector: '.profile__description',
+  avatarSelector: '.profile__avatar'
+  // getUserInfoApi: () => {
+  //   api.getUserInfo()
+  //     .then(initData => {
+  //       const data = {
+  //         userName: initData.name,
+  //         userInfo: initData.about
+  //       }
+  //       return data;
+  //     })
+  // }
+}, options);
+
+userInfo.getUserInfo()
+  .then(data => {
+    userInfo.setUserInfo(data.name, data.about);
+    userInfo.setAvatar(data.avatar);
+  })
 
 const popupUserInfo = new PopupWithForm({
   popupSelector: '.popup_type_edit-profile',
@@ -76,9 +98,11 @@ popupCardInfo.setEventListeners();
 profileEditButton.addEventListener('click', function () {
 
   popupUserInfo.open();
-  const data = userInfo.getUserInfo();
-  popupEditProfileTitle.value = data.userName;
-  popupEditProfileDescription.value = data.userInfo;
+  userInfo.getUserInfo()
+    .then(data => {
+      popupEditProfileTitle.value = data.name;
+      popupEditProfileDescription.value = data.about;
+    })
 });
 
 profileAddButton.addEventListener('click', function () {

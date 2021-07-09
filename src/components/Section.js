@@ -1,14 +1,32 @@
 export default class Section {
-  constructor({items, renderer}, containerSelector) {
+  constructor({items, renderer}, containerSelector, config) {
     this._renderer = renderer;
     this._items = items;
     this._container = document.querySelector(containerSelector);
+
+    this._url = config.url + '/cards';
+    this._headers = config.headers;
+  }
+
+  getCards() {
+    return fetch(this._url, {
+      headers: this._headers
+    })
+      .then(res => {
+        if(res.ok) {
+          return res.json();
+        }
+        throw res.status;
+      })
   }
 
   rendererItems() {
-    this._items.forEach(item => {
-      this._renderer(item);
-    });
+    this.getCards()
+      .then(items => {
+        items.forEach(item => {
+          this._renderer(item);
+        });
+      })
   }
 
   addItem(element) {
