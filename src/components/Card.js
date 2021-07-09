@@ -1,14 +1,16 @@
 export class Card {
-  constructor(title, imageLink, likes, ownerId, userId, cardId, templateSelector, { handleCardClick, handleCardTrash }) {
+  constructor(title, imageLink, likes, ownerId, userId, cardId, isLiked, templateSelector, { handleCardClick, handleCardTrash, handleCardLike}) {
     this._title = title;
     this._imageLink = imageLink;
     this._likes = likes;
     this._ownerId = ownerId;
     this._cardId = cardId;
     this._userId = userId;
+    this._isLiked = isLiked;
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
     this._handleCardTrash = handleCardTrash;
+    this._handleCardLike = handleCardLike;
   }
 
   _getTemplate() {
@@ -23,6 +25,7 @@ export class Card {
 
   _toggleLike(e) {
     e.target.classList.toggle('element__like_active');
+    this._isLiked = !this._isLiked;
   }
 
   _removeElement() {
@@ -31,7 +34,12 @@ export class Card {
 
   _setEventListeners() {
     this._element.querySelector('.element__like').addEventListener('click', (e) => {
-      this._toggleLike(e);
+      this._handleCardLike(this._isLiked, this._cardId)
+        .then(res => {
+          this._toggleLike(e);
+          this._likes = res.likes.length;
+          this._element.querySelector('.element__like-amount').textContent = this._likes;
+        })
     });
 
     if (this._ownerId === this._userId) {
@@ -56,6 +64,9 @@ export class Card {
     this._element.querySelector('.element__title').textContent = this._title;
     this._element.querySelector('.element__like-amount').textContent = this._likes;
 
+    if(this._isLiked) {
+      this._element.querySelector('.element__like').classList.add('element__like_active');
+    }
 
     if (this._ownerId !== this._userId) {
       this._element.querySelector('.element__trash').remove();

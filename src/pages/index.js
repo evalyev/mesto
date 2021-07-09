@@ -51,7 +51,14 @@ const section = new Section(
   {
     items: initialCards,
     renderer: (cardItem) => {
-      const cardElement = createCard(cardItem.name, cardItem.link, cardItem.likes.length, cardItem.owner, cardItem._id);
+      let isLiked = false;
+      const userId = userInfo.getUserId();
+      cardItem.likes.forEach(user => {
+        if(user._id === userId) {
+          isLiked = true;
+        }
+      })
+      const cardElement = createCard(cardItem.name, cardItem.link, cardItem.likes.length, cardItem.owner, cardItem._id, isLiked);
       section.addItem(cardElement);
     }
   }, '.elements', options);
@@ -68,13 +75,21 @@ const popupDelete = new PopupWithButton({
 });
 popupDelete.setEventListeners();
 
-function createCard(title, imageLink, likes, owner, cardId) {
-  const card = new Card(title, imageLink, likes, owner._id, userInfo.getUserId(), cardId, '#element', {
+function createCard(title, imageLink, likes, owner, cardId, isLiked) {
+  const card = new Card(title, imageLink, likes, owner._id, userInfo.getUserId(), cardId, isLiked, '#element', {
     handleCardClick: (title, imageLink) => {
       popupWithImage.open(title, imageLink);
     },
     handleCardTrash: (cardId) => {
       popupDelete.open(cardId, cardElement);
+    },
+    handleCardLike: (isLiked, cardId) => {
+      if(isLiked) {
+        return section.deslikeCard(cardId);
+      }
+      else {
+        return section.likeCard(cardId)
+      }
     }
   });
   const cardElement = card.generateCard();
@@ -105,7 +120,7 @@ const popupCardInfo = new PopupWithForm({
 
     section.addCard(data['edit-form-name'], data['edit-form-description'])
       .then((res) => {
-        const cardElement = createCard(data['edit-form-name'], data['edit-form-description'], 0, userInfo.getUserId(), res._id);
+        const cardElement = createCard(data['edit-form-name'], data['edit-form-description'], 0, userInfo.getUserId(), res._id, false);
         section.addItem(cardElement);
         popupCardInfo.close();
       })

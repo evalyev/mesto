@@ -16,9 +16,3 @@
   border: none;
   outline: none;
 }
-
-.element__like:active {
-  border: none;
-  background: none;
-  background-image: url(../../../images/element__like-active.svg);
-}
