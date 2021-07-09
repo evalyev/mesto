@@ -19,6 +19,7 @@ import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
 import Api from '../components/Api.js';
+import PopupWithButton from '../components/PopupWithButton.js';
 
 
 const api = new Api(options);
@@ -27,10 +28,16 @@ api.getUserInfo();
 const popupWithImage = new PopupWithImage('.popup_type_card', '.popup__image', '.popup__card-title');
 popupWithImage.setEventListeners();
 
+const popupDelete = new PopupWithButton('.popup_type_delete');
+popupDelete.setEventListeners();
+
 function createCard(title, imageLink, likes) {
   const card = new Card(title, imageLink, likes, '#element', {
     handleCardClick: (title, imageLink) => {
       popupWithImage.open(title, imageLink);
+    },
+    handleCardTrash: () => {
+      popupDelete.open();
     }
   });
   const cardElement = card.generateCard();
@@ -112,4 +119,4 @@ profileEditButton.addEventListener('click', function () {
 profileAddButton.addEventListener('click', function () {
   popupCardInfo.open();
 
-})
+});
