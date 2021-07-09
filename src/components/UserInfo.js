@@ -24,6 +24,14 @@ export default class UserInfo {
         }
         throw res.status;
       })
+      .then(res => {
+        this._userId = res._id;
+        return res;
+      })
+  }
+
+  getUserId() {
+    return this._userId;
   }
 
   setUserInfo(dataUserName, dataUserInfo) {
