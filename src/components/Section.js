@@ -1,92 +1,94 @@
 export default class Section {
-  constructor({items, renderer}, containerSelector, config) {
+  constructor({items, renderer}, containerSelector) {
     this._renderer = renderer;
     this._items = items;
     this._container = document.querySelector(containerSelector);
 
-    this._url = config.url + '/cards';
-    this._headers = config.headers;
+    // this._url = config.url + '/cards';
+    // this._headers = config.headers;
   }
 
-  getCards() {
-    return fetch(this._url, {
-      headers: this._headers
-    })
-      .then(res => {
-        if(res.ok) {
-          return res.json();
-        }
-        throw res.status;
-      })
-  }
+  // getCards() {
+  //   return fetch(this._url, {
+  //     headers: this._headers
+  //   })
+  //     .then(res => {
+  //       if(res.ok) {
+  //         return res.json();
+  //       }
+  //       throw res.status;
+  //     })
+  // }
 
-  addCard(title, description) {
-    return fetch(this._url, {
-      method: 'POST',
-      headers: this._headers,
-      body: JSON.stringify({
-        name: title,
-        link: description
-      })
-    })
-      .then(res => {
-        if(res.ok) {
-          return res.json();
-        }
-        throw res.status;
-      })
-  }
+  // addCard(title, description) {
+  //   return fetch(this._url, {
+  //     method: 'POST',
+  //     headers: this._headers,
+  //     body: JSON.stringify({
+  //       name: title,
+  //       link: description
+  //     })
+  //   })
+  //     .then(res => {
+  //       if(res.ok) {
+  //         return res.json();
+  //       }
+  //       throw res.status;
+  //     })
+  // }
 
-  removeCard(cardId, card) {
+  // removeCard(cardId, card) {
 
-    fetch(this._url + '/' + cardId, {
-      method: 'DELETE',
-      headers: this._headers,
-    })
-      .then(res => {
-        if(res.ok) {
-          return res.json();
-        }
-        throw res.status;
-      })
-      .then(res => {
-        card.remove();
-      })
-  }
+  //   fetch(this._url + '/' + cardId, {
+  //     method: 'DELETE',
+  //     headers: this._headers,
+  //   })
+  //     .then(res => {
+  //       if(res.ok) {
+  //         return res.json();
+  //       }
+  //       throw res.status;
+  //     })
+  //     .then(res => {
+  //       card.remove();
+  //     })
+  // }
 
-  likeCard(cardId) {
-    return fetch(this._url + '/likes/' + cardId, {
-      method: 'PUT',
-      headers: this._headers,
-    })
-      .then(res => {
-        if(res.ok) {
-          return res.json();
-        }
-        throw res.status;
-      })
-  }
+  // likeCard(cardId) {
+  //   return fetch(this._url + '/likes/' + cardId, {
+  //     method: 'PUT',
+  //     headers: this._headers,
+  //   })
+  //     .then(res => {
+  //       if(res.ok) {
+  //         return res.json();
+  //       }
+  //       throw res.status;
+  //     })
+  // }
 
-  deslikeCard(cardId) {
-    return fetch(this._url + '/likes/' + cardId, {
-      method: 'DELETE',
-      headers: this._headers,
-    })
-      .then(res => {
-        if(res.ok) {
-          return res.json();
-        }
-        throw res.status;
-      })
-  }
+  // deslikeCard(cardId) {
+  //   return fetch(this._url + '/likes/' + cardId, {
+  //     method: 'DELETE',
+  //     headers: this._headers,
+  //   })
+  //     .then(res => {
+  //       if(res.ok) {
+  //         return res.json();
+  //       }
+  //       throw res.status;
+  //     })
+  // }
 
   rendererItems() {
-    this.getCards()
-      .then(items => {
-        items.forEach(item => {
-          this._renderer(item);
-        });
-      })
+    // this.getCards()
+    //   .then(items => {
+    //     items.forEach(item => {
+    //       this._renderer(item);
+    //     });
+    //   })
+
+    this._renderer()
   }
 
   addItem(element) {
