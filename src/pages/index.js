@@ -39,23 +39,23 @@ const userInfo = new UserInfo({
   userNameSelector: '.profile__name',
   userInfoSelector: '.profile__description',
   avatarSelector: '.profile__avatar',
-  setUserInfoApi: (name, about) => {
-    return api.setUserInfo(name, about)
-      .then(data => {
-        userInfo.renderInfo(data);
-        return data;
-      })
-      .catch((err) => {
-        console.log(err); // выведем ошибку в консоль
-        return Promise.reject(`Ошибка: ${err}`);
-      });
-  }
+  // setUserInfoApi: (name, about) => {
+  //   return api.setUserInfo(name, about)
+  //     .then(data => {
+  //       userInfo.renderInfo(data);
+  //       return data;
+  //     })
+  //     .catch((err) => {
+  //       console.log(err); // выведем ошибку в консоль
+  //       return Promise.reject(`Ошибка: ${err}`);
+  //     });
+  // }
 }, options);
 
 
 Promise.all([api.getUserInfo(), api.geiInitialCards()])
   .then(data => {
-    userInfo.renderInfo(data[0]);
+    userInfo.setUserInfo(data[0]);
 
     const section = new Section(
       {
@@ -190,8 +190,8 @@ const editProfileFormValidator = new FormValidator(config, popupEditProfileForm)
 editProfileFormValidator.enableValidation();
 const addCardFormValidator = new FormValidator(config, popupAddCardForm);
 addCardFormValidator.enableValidation();
-const editavatarValidator = new FormValidator(config, popupEditAvatarForm);
-editavatarValidator.enableValidation();
+const editAvatarValidator = new FormValidator(config, popupEditAvatarForm);
+editAvatarValidator.enableValidation();
 
 
 const popupUserInfo = new PopupWithForm({
@@ -199,8 +199,9 @@ const popupUserInfo = new PopupWithForm({
   handleFormSubmit: (data) => {
     popupEditCardBtn.textContent = 'Сохранить...';
 
-    userInfo.setUserInfo(data['edit-form-name'], data['edit-form-description'])
+    api.setUserInfo(data['edit-form-name'], data['edit-form-description'])
       .then(res => {
+        userInfo.setUserInfo(res);
         popupEditCardBtn.textContent = "Сохранить";
         popupUserInfo.close();
       })
