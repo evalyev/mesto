@@ -202,12 +202,14 @@ const popupUserInfo = new PopupWithForm({
     api.setUserInfo(data['edit-form-name'], data['edit-form-description'])
       .then(res => {
         userInfo.setUserInfo(res);
-        popupEditCardBtn.textContent = "Сохранить";
         popupUserInfo.close();
       })
       .catch((err) => {
         console.log(err); // выведем ошибку в консоль
-      });
+      })
+      .finally(() => {
+        popupEditCardBtn.textContent = "Сохранить";
+      })
 
   }
 });
