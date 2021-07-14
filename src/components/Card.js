@@ -39,7 +39,11 @@ export class Card {
           this._toggleLike(e);
           this._likes = res.likes.length;
           this._element.querySelector('.element__like-amount').textContent = this._likes;
+          return res;
         })
+        .catch((err) => {
+          console.log(err); // выведем ошибку в консоль
+        }); 
     });
 
     if (this._ownerId === this._userId) {

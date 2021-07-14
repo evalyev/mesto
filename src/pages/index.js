@@ -39,49 +39,125 @@ const userInfo = new UserInfo({
   userNameSelector: '.profile__name',
   userInfoSelector: '.profile__description',
   avatarSelector: '.profile__avatar',
-  getUserInfoApi: () => {
-    return api.getUserInfo()
-  },
   setUserInfoApi: (name, about) => {
     return api.setUserInfo(name, about)
-  },
-  setAvatarApi: (imageLink) => {
-    return api.setAvatar(imageLink)
+      .then(data => {
+        userInfo.renderInfo(data);
+        return data;
+      })
+      .catch((err) => {
+        console.log(err); // выведем ошибку в консоль
+        return Promise.reject(`Ошибка: ${err}`);
+      });
   }
 }, options);
 
-userInfo.getUserInfo();
 
+Promise.all([api.getUserInfo(), api.geiInitialCards()])
+  .then(data => {
+    userInfo.renderInfo(data[0]);
 
-const section = new Section(
-  {
-    items: initialCards,
-    renderer: () => {
-      api.geiInitialCards()
-        .then(cards => {
-          cards.forEach(cardItem => {
-            let isLiked = false;
-            const userId = userInfo.getUserId();
-            cardItem.likes.forEach(user => {
-              if (user._id === userId) {
-                isLiked = true;
-              }
-            })
-            const cardElement = createCard(cardItem.name, cardItem.link, cardItem.likes.length, cardItem.owner, cardItem._id, isLiked);
-            section.addItem(cardElement);
+    const section = new Section(
+      {
+        items: data[1],
+        renderer: (card) => {
+          // api.geiInitialCards()
+          //   .then(cards => {
+          //     cards.forEach(cardItem => {
+          //       let isLiked = false;
+          //       const userId = userInfo.getUserId();
+          //       cardItem.likes.forEach(user => {
+          //         if (user._id === userId) {
+          //           isLiked = true;
+          //         }
+          //       })
+          //       const cardElement = createCard(cardItem.name, cardItem.link, cardItem.likes.length, cardItem.owner, cardItem._id, isLiked);
+          //       section.addItem(cardElement);
+          //     });
+          //   })
+
+          let isLiked = false;
+          const userId = userInfo.getUserId();
+          card.likes.forEach(user => {
+            if (user._id === userId) {
+              isLiked = true;
+            }
           });
-        })
-    }
-  }, '.elements');
+          const cardElement = createCard(card.name, card.link, card.likes.length, card.owner, card._id, isLiked);
+          section.addItem(cardElement);
+        }
+      }, '.elements');
 
-section.rendererItems();
+    section.rendererItems();
+
+
+    const popupCardInfo = new PopupWithForm({
+      popupSelector: '.popup_type_add-card',
+      handleFormSubmit: (data) => {
+
+        popupAddCardBtn.textContent = 'Создать...';
+
+        api.addCard(data['edit-form-name'], data['edit-form-description'])
+          .then((res) => {
+            popupAddCardBtn.textContent = 'Создать';
+            const owner = {};
+            owner._id = userInfo.getUserId();
+            const cardElement = createCard(data['edit-form-name'], data['edit-form-description'], 0, owner, res._id, false);
+            section.addItem(cardElement);
+            popupCardInfo.close();
+          })
+          .catch((err) => {
+            console.log(err); // выведем ошибку в консоль
+          });
+      }
+    });
+    popupCardInfo.setEventListeners();
+    profileAddButton.addEventListener('click', function () {
+      popupCardInfo.open();
+
+    });
+
+  })
+  .catch((err) => {
+    console.log(err); // выведем ошибку в консоль
+  });
+
+
+// const section = new Section(
+//   {
+//     items: initialCards,
+//     renderer: () => {
+//       api.geiInitialCards()
+//         .then(cards => {
+//           cards.forEach(cardItem => {
+//             let isLiked = false;
+//             const userId = userInfo.getUserId();
+//             cardItem.likes.forEach(user => {
+//               if (user._id === userId) {
+//                 isLiked = true;
+//               }
+//             })
+//             const cardElement = createCard(cardItem.name, cardItem.link, cardItem.likes.length, cardItem.owner, cardItem._id, isLiked);
+//             section.addItem(cardElement);
+//           });
+//         })
+//     }
+//   }, '.elements');
+
+// section.rendererItems();
 
 const popupDelete = new PopupWithButton({
   popupSelector: '.popup_type_delete',
   formSelector: '.popup__form',
   handleFormSubmit: (cardId, card) => {
-    popupDelete.close();
-    api.removeCard(cardId, card);
+    api.removeCard(cardId)
+      .then(res => {
+        card.remove();
+        popupDelete.close();
+      })
+      .catch((err) => {
+        console.log(err); // выведем ошибку в консоль
+      });
   }
 });
 popupDelete.setEventListeners();
@@ -121,64 +197,70 @@ editavatarValidator.enableValidation();
 const popupUserInfo = new PopupWithForm({
   popupSelector: '.popup_type_edit-profile',
   handleFormSubmit: (data) => {
-    popupEditCardBtn.textContent += '...';
+    popupEditCardBtn.textContent = 'Сохранить...';
 
     userInfo.setUserInfo(data['edit-form-name'], data['edit-form-description'])
       .then(res => {
         popupEditCardBtn.textContent = "Сохранить";
         popupUserInfo.close();
       })
+      .catch((err) => {
+        console.log(err); // выведем ошибку в консоль
+      });
 
   }
 });
 popupUserInfo.setEventListeners();
 
-const popupCardInfo = new PopupWithForm({
-  popupSelector: '.popup_type_add-card',
-  handleFormSubmit: (data) => {
+// const popupCardInfo = new PopupWithForm({
+//   popupSelector: '.popup_type_add-card',
+//   handleFormSubmit: (data) => {
 
-    popupAddCardBtn.textContent += '...';
+//     popupAddCardBtn.textContent = 'Создать...';
 
-    api.addCard(data['edit-form-name'], data['edit-form-description'])
-      .then((res) => {
-        popupAddCardBtn.textContent = 'Создать';
-        const cardElement = createCard(data['edit-form-name'], data['edit-form-description'], 0, userInfo.getUserId(), res._id, false);
-        section.addItem(cardElement);
-        popupCardInfo.close();
-      })
-  }
-});
-popupCardInfo.setEventListeners();
+//     api.addCard(data['edit-form-name'], data['edit-form-description'])
+//       .then((res) => {
+//         popupAddCardBtn.textContent = 'Создать';
+//         const owner = {};
+//         owner._id = userInfo.getUserId();
+//         const cardElement = createCard(data['edit-form-name'], data['edit-form-description'], 0, owner, res._id, false);
+//         section.addItem(cardElement);
+//         popupCardInfo.close();
+//       })
+//   }
+// });
+// popupCardInfo.setEventListeners();
 
 
 
 profileEditButton.addEventListener('click', function () {
 
   popupUserInfo.open();
-  api.getUserInfo()
-    .then(data => {
-      popupEditProfileTitle.value = data.name;
-      popupEditProfileDescription.value = data.about;
-    })
+  const data = userInfo.getUserInfo();
+  popupEditProfileTitle.value = data.name;
+  popupEditProfileDescription.value = data.about;
 });
 
-profileAddButton.addEventListener('click', function () {
-  popupCardInfo.open();
+// profileAddButton.addEventListener('click', function () {
+//   popupCardInfo.open();
 
-});
+// });
 
 const popupAvatar = new PopupWithForm({
   popupSelector: '.popup_type_avatar',
   handleFormSubmit: (data) => {
 
-    popupEditAvatarBtn.textContent += '...';
+    popupEditAvatarBtn.textContent = 'Сохранить...';
 
-    userInfo.setAvatar(data['edit-form-description'])
+    api.setAvatar(data['edit-form-description'])
       .then((res) => {
         popupEditAvatarBtn.textContent = 'Сохранить';
-
+        userInfo.setAvatar(res.avatar);
         popupAvatar.close();
       })
+      .catch((err) => {
+        console.log(err); // выведем ошибку в консоль
+      });
   }
 });
 popupAvatar.setEventListeners();

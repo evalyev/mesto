@@ -8,87 +8,12 @@ export default class Section {
     // this._headers = config.headers;
   }
 
-  // getCards() {
-  //   return fetch(this._url, {
-  //     headers: this._headers
-  //   })
-  //     .then(res => {
-  //       if(res.ok) {
-  //         return res.json();
-  //       }
-  //       throw res.status;
-  //     })
-  // }
-
-  // addCard(title, description) {
-  //   return fetch(this._url, {
-  //     method: 'POST',
-  //     headers: this._headers,
-  //     body: JSON.stringify({
-  //       name: title,
-  //       link: description
-  //     })
-  //   })
-  //     .then(res => {
-  //       if(res.ok) {
-  //         return res.json();
-  //       }
-  //       throw res.status;
-  //     })
-  // }
-
-  // removeCard(cardId, card) {
-
-  //   fetch(this._url + '/' + cardId, {
-  //     method: 'DELETE',
-  //     headers: this._headers,
-  //   })
-  //     .then(res => {
-  //       if(res.ok) {
-  //         return res.json();
-  //       }
-  //       throw res.status;
-  //     })
-  //     .then(res => {
-  //       card.remove();
-  //     })
-  // }
-
-  // likeCard(cardId) {
-  //   return fetch(this._url + '/likes/' + cardId, {
-  //     method: 'PUT',
-  //     headers: this._headers,
-  //   })
-  //     .then(res => {
-  //       if(res.ok) {
-  //         return res.json();
-  //       }
-  //       throw res.status;
-  //     })
-  // }
-
-  // deslikeCard(cardId) {
-  //   return fetch(this._url + '/likes/' + cardId, {
-  //     method: 'DELETE',
-  //     headers: this._headers,
-  //   })
-  //     .then(res => {
-  //       if(res.ok) {
-  //         return res.json();
-  //       }
-  //       throw res.status;
-  //     })
-  // }
-
   rendererItems() {
-    // this.getCards()
-    //   .then(items => {
-    //     items.forEach(item => {
-    //       this._renderer(item);
-    //     });
-    //   })
 
-    this._renderer()
+    this._items.forEach(cardItem => {
+      this._renderer(cardItem);
+    });
+
   }
 
   addItem(element) {

@@ -14,9 +14,6 @@ export default class Api {
         }
         return Promise.reject(`Ошибка: ${res.status}`);
       })
-      .catch((err) => {
-        console.log(err); // выведем ошибку в консоль
-      }); 
 
   }
 
@@ -36,9 +33,7 @@ export default class Api {
         }
         return Promise.reject(`Ошибка: ${res.status}`);
       })
-      .catch((err) => {
-        console.log(err); // выведем ошибку в консоль
-      }); 
+
   }
 
   setAvatar(imageLink) {
@@ -56,9 +51,7 @@ export default class Api {
         }
         return Promise.reject(`Ошибка: ${res.status}`);
       })
-      .catch((err) => {
-        console.log(err); // выведем ошибку в консоль
-      }); 
+
 
   }
 
@@ -73,9 +66,6 @@ export default class Api {
         }
         return Promise.reject(`Ошибка: ${res.status}`);
       })
-      .catch((err) => {
-        console.log(err); // выведем ошибку в консоль
-      }); 
   }
 
 
@@ -94,15 +84,13 @@ export default class Api {
         }
         return Promise.reject(`Ошибка: ${res.status}`);
       })
-      .catch((err) => {
-        console.log(err); // выведем ошибку в консоль
-      }); 
+
   }
 
 
-  removeCard(cardId, card) {
+  removeCard(cardId) {
 
-    fetch(this._url + '/cards/' + cardId, {
+    return fetch(this._url + '/cards/' + cardId, {
       method: 'DELETE',
       headers: this._headers,
     })
@@ -112,12 +100,6 @@ export default class Api {
         }
         return Promise.reject(`Ошибка: ${res.status}`);
       })
-      .then(res => {
-        card.remove();
-      })
-      .catch((err) => {
-        console.log(err); // выведем ошибку в консоль
-      }); 
   }
 
   likeCard(cardId) {
@@ -131,9 +113,7 @@ export default class Api {
         }
         return Promise.reject(`Ошибка: ${res.status}`);
       })
-      .catch((err) => {
-        console.log(err); // выведем ошибку в консоль
-      }); 
+
   }
 
   deslikeCard(cardId) {
@@ -147,9 +127,7 @@ export default class Api {
         }
         return Promise.reject(`Ошибка: ${res.status}`);
       })
-      .catch((err) => {
-        console.log(err); // выведем ошибку в консоль
-      }); 
+
   }
 
 
